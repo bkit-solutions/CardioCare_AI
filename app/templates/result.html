@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card result-card reveal">
+  <h2>Heart Disease Risk Assessment</h2>
+  <p class="note">Hybrid ML model prediction outcome</p>
+
+  {% set badge_class = "low" %}
+  {% if "Moderate" in risk %}{% set badge_class = "mod" %}{% endif %}
+  {% if "High" in risk %}{% set badge_class = "high" %}{% endif %}
+
+  <!-- RISK VISUAL -->
+  <div class="risk-visual">
+    <div class="circle" id="circle">
+      <span id="percent">0%</span>
+    </div>
+    <span class="badge {{ badge_class }}">{{ risk }}</span>
+  </div>
+
+  <div class="riskbar">
+    <div class="riskfill" id="riskFill"></div>
+  </div>
+
+  <!-- RESULT GRID (UNCHANGED) -->
+  <div class="result-grid">
+    <div class="card reveal">
+      <h3>Recommendation</h3>
+      <p class="note">{{ recommendation }}</p>
+    </div>
+
+    <div class="card reveal">
+      <h3>Model Explanation</h3>
+      <p class="note">
+        Prediction is generated using ensemble voting from Logistic Regression,
+        Random Forest, and Gradient Boosting classifiers.
+      </p>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="btn-row">
+    <a class="btn btn-primary" href="/analysis">New Analysis</a>
+    <a class="btn btn-ghost" href="/">Home</a>
+    <a class="btn btn-ghost" href="/download-report">Download Report</a>
+  </div>
+
+  <p class="note">⚠ Educational use only.</p>
+</div>
+
+<!-- CHATBOT TOGGLE -->
+<div id="chatbot-toggle" onclick="toggleChat()">🤖</div>
+
+<!-- CHATBOT -->
+<div id="chatbot-box">
+  <div id="chatbot-header">
+    <span>CardioCare AI Assistant</span>
+    <button onclick="toggleChat()">✖</button>
+  </div>
+
+  <div id="chatbot-messages">
+    <div class="bot-msg">
+      Hi! Ask me about the risk, model, or recommendation.
+    </div>
+  </div>
+
+  <input
+    id="chatbot-input"
+    placeholder="Ask here..."
+    onkeydown="handleChat(event)"
+  />
+</div>
+
+<script>
+  // ===== RISK ANIMATION =====
+  const prob = Number("{{ probability }}");
+  let count = 0;
+  const percent = document.getElementById("percent");
+
+  const interval = setInterval(() => {
+    if (count >= prob) clearInterval(interval);
+    else {
+      count++;
+      percent.innerText = count + "%";
+    }
+  }, 15);
+
+  document.getElementById("riskFill").style.width = prob + "%";
+
+  document.getElementById("circle").style.background =
+    `conic-gradient(#00d4ff ${prob * 3.6}deg, rgba(255,255,255,0.1) 0deg)`;
+
+  // ===== CHATBOT LOGIC =====
+  function toggleChat(){
+    const box = document.getElementById("chatbot-box");
+    box.style.display = box.style.display === "flex" ? "none" : "flex";
+  }
+
+  function handleChat(e){
+    if(e.key !== "Enter") return;
+
+    const input = e.target.value.trim();
+    if(!input) return;
+
+    const msgBox = document.getElementById("chatbot-messages");
+    msgBox.innerHTML += `<div class="user-msg">${input}</div>`;
+
+    let reply = "I can explain the risk, model, or recommendation.";
+
+    const q = input.toLowerCase();
+    if(q.includes("risk")){
+      reply = "Your predicted risk is {{ risk }} with probability {{ probability }}%.";
+    }
+    else if(q.includes("model")){
+      reply = "The system uses Logistic Regression, Random Forest, and Gradient Boosting.";
+    }
+    else if(q.includes("recommend")){
+      reply = "{{ recommendation }}";
+    }
+    else if(q.includes("project")){
+      reply = "CardioCare AI is a Hybrid ML-based Clinical Decision Support System.";
+    }
+
+    msgBox.innerHTML += `<div class="bot-msg">${reply}</div>`;
+    msgBox.scrollTop = msgBox.scrollHeight;
+    e.target.value = "";
+  }
+</script>
+
+{% endblock %}

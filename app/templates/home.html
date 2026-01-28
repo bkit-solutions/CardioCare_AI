@@ -1,0 +1,153 @@
+  {% extends "base.html" %}
+  {% block content %}
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="fade-in">
+      <h1 class="hero-title">
+        AI-Driven Heart Disease Risk Prediction
+      </h1>
+      <p class="hero-sub">
+        A Hybrid Machine Learning based Clinical Decision Support System
+        for early cardiovascular risk assessment.
+      </p>
+
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/analysis">Start Risk Analysis</a>
+        <a class="btn btn-ghost" href="#features">Explore System</a>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h2>System Overview</h2>
+      <p class="note">
+        Combines multiple machine learning models to predict the probability
+        of heart disease and classify patient risk levels.
+      </p>
+      <p class="note">⚠ Educational prototype</p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section">
+    <h2 class="section-title">Key Features</h2>
+    <div class="grid3">
+      <div class="stat reveal">🧠 Hybrid ML Ensemble</div>
+      <div class="stat reveal">📊 Risk Probability Estimation</div>
+      <div class="stat reveal">🩺 Clinical Recommendations</div>
+      <div class="stat reveal">⚡ Instant Prediction</div>
+      <div class="stat reveal">📈 Explainable Results</div>
+      <div class="stat reveal">🔐 Offline & Secure</div>
+    </div>
+  </section>
+
+  <!-- ================= MODEL ARCHITECTURE (VISUAL FLOW) ================= -->
+<section class="section model-flow reveal">
+  <h2 class="section-title">Hybrid Model Architecture</h2>
+
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h3>Logistic Regression</h3>
+      <p>Baseline linear risk estimation</p>
+    </div>
+
+    <div class="flow-arrow">+</div>
+
+    <div class="flow-card">
+      <h3>Random Forest</h3>
+      <p>Captures non-linear feature interactions</p>
+    </div>
+
+    <div class="flow-arrow">+</div>
+
+    <div class="flow-card">
+      <h3>Gradient Boosting</h3>
+      <p>Optimized ensemble learning</p>
+    </div>
+  </div>
+
+  <div class="flow-result">
+    Ensemble Aggregation → Final Risk Score
+  </div>
+</section>
+
+<!-- ================= CLINICAL PARAMETERS ================= -->
+<section class="section param-showcase reveal">
+  <div class="param-left">
+    <h2 class="section-title">Clinical Parameters</h2>
+    <p class="note">
+      The prediction model relies on clinically validated patient attributes
+      commonly used in cardiovascular diagnosis.
+    </p>
+  </div>
+
+  <div class="param-right">
+    <div class="param-card">Age</div>
+    <div class="param-card">Resting Blood Pressure</div>
+    <div class="param-card">Cholesterol</div>
+    <div class="param-card">Max Heart Rate</div>
+    <div class="param-card">ECG Result</div>
+    <div class="param-card">Exercise Angina</div>
+    <div class="param-card">ST Depression</div>
+    <div class="param-card">Major Vessels</div>
+    <div class="param-card">Chest Pain Type</div>
+    <div class="param-card">Thalassemia</div>
+  </div>
+</section>
+
+
+<!-- ================= RISK CLASSIFICATION ================= -->
+<section class="section risk-decision reveal">
+  <h2 class="section-title center">Risk Classification</h2>
+  <p class="note center">
+    Predicted probability is mapped into clinical risk categories
+    to guide appropriate action.
+  </p>
+
+  <div class="risk-ladder">
+    <div class="risk-step low">
+      <h3>Low Risk</h3>
+      <p>Minimal probability</p>
+      <span>Lifestyle guidance & routine monitoring</span>
+    </div>
+
+    <div class="risk-step mod">
+      <h3>Moderate Risk</h3>
+      <p>Elevated probability</p>
+      <span>Preventive care & periodic screening</span>
+    </div>
+
+    <div class="risk-step high">
+      <h3>High Risk</h3>
+      <p>Critical probability</p>
+      <span>Immediate clinical consultation</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= TECHNOLOGY STACK ================= -->
+<section class="section tech-footer reveal">
+  <h2 class="section-title center">Technology Stack</h2>
+
+  <div class="tech-footer-grid">
+    <div>🐍 Python</div>
+    <div>⚙ Flask</div>
+    <div>📊 Scikit-learn</div>
+    <div>🌐 HTML5</div>
+    <div>🎨 CSS3</div>
+    <div>✨ JavaScript</div>
+  </div>
+
+  <p class="note center">
+    Designed as a lightweight, offline-capable academic prototype.
+  </p>
+</section>
+
+
+
+  <footer class="footer">
+    <p>CardioCare AI · Final Year B.Tech Project · 2026</p>
+  </footer>
+
+  {% endblock %}

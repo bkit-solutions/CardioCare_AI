@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+  <h2 style="margin:0;">Heart Risk Analysis</h2>
+  <p class="note">Fill patient details to predict risk probability and generate recommendations.</p>
+
+  <form method="POST" id="riskForm">
+<div class="card reveal">
+
+    <div class="form-grid">
+
+      <div>
+        <label>Age</label>
+        <input name="age" type="number" placeholder="e.g., 45" required>
+      </div>
+
+      <div>
+        <label>Resting BP</label>
+        <input name="trestbps" type="number" placeholder="e.g., 130" required>
+      </div>
+
+      <div>
+        <label>Cholesterol</label>
+        <input name="chol" type="number" placeholder="e.g., 240" required>
+      </div>
+
+      <div>
+        <label>Max Heart Rate</label>
+        <input name="thalch" type="number" placeholder="e.g., 150" required>
+      </div>
+
+      <div>
+        <label>ST Depression (oldpeak)</label>
+        <input name="oldpeak" step="0.1" type="number" placeholder="e.g., 1.2" required>
+      </div>
+
+      <div>
+        <label>Major Vessels (ca: 0-3)</label>
+        <select name="ca" required>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Sex</label>
+        <select name="sex" required>
+          <option value="1">Male</option>
+          <option value="0">Female</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Fasting Blood Sugar (FBS)</label>
+        <select name="fbs" required>
+          <option value="0">False</option>
+          <option value="1">True</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Exercise Angina</label>
+        <select name="exang" required>
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Chest Pain Type (cp)</label>
+        <select name="cp" required>
+          <option value="0">Typical Angina</option>
+          <option value="1">Atypical Angina</option>
+          <option value="2">Non-Anginal</option>
+          <option value="3">Asymptomatic</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Rest ECG (restecg)</label>
+        <select name="restecg" required>
+          <option value="0">Normal</option>
+          <option value="1">ST-T abnormality</option>
+          <option value="2">LV hypertrophy</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Slope</label>
+        <select name="slope" required>
+          <option value="0">Downsloping</option>
+          <option value="1">Flat</option>
+          <option value="2">Upsloping</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Thal</label>
+        <select name="thal" required>
+          <option value="0">Normal</option>
+          <option value="2">Fixed defect</option>
+          <option value="3">Reversible defect</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="form-actions" id="demo">
+      <button type="submit" class="btn btn-primary">Analyze Heart Risk</button>
+      <button type="button" class="btn btn-ghost" onclick="fillLow()">Demo: Low Risk</button>
+      <button type="button" class="btn btn-ghost" onclick="fillHigh()">Demo: High Risk</button>
+    </div>
+
+    <p class="note" style="margin-top:12px;">
+      ⚠ This prediction is for educational demo only.
+    </p>
+</div>
+  </form>
+</div>
+
+<script>
+function fillLow(){
+  const f = document.getElementById("riskForm");
+  f.age.value = 29;
+  f.trestbps.value = 115;
+  f.chol.value = 170;
+  f.thalch.value = 185;
+  f.oldpeak.value = 0.0;
+  f.ca.value = 0;
+  f.sex.value = 0;
+  f.fbs.value = 0;
+  f.exang.value = 0;
+  f.cp.value = 1;
+  f.restecg.value = 0;
+  f.slope.value = 2;
+  f.thal.value = 0;
+}
+
+function fillHigh(){
+  const f = document.getElementById("riskForm");
+  f.age.value = 61;
+  f.trestbps.value = 160;
+  f.chol.value = 290;
+  f.thalch.value = 105;
+  f.oldpeak.value = 3.2;
+  f.ca.value = 3;
+  f.sex.value = 1;
+  f.fbs.value = 1;
+  f.exang.value = 1;
+  f.cp.value = 3;
+  f.restecg.value = 2;
+  f.slope.value = 0;
+  f.thal.value = 3;
+}
+</script>
+
+{% endblock %}
