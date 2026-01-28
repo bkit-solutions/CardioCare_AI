@@ -99,8 +99,8 @@ CardioCare_AI/
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone <your-repository-url>
-cd Heart_Disease
+git clone https://github.com/bkit-solutions/CardioCare_AI.git
+cd CardioCare_AI
 ```
 
 ### 2️⃣ Create a Virtual Environment
